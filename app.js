@@ -31,9 +31,9 @@ bootstrap();
 
 async function initiateScrapping(urlQueue) {
   try {
-    console.log('urlqueue was', urlQueue);
+    // console.log('urlqueue was', urlQueue);
     let selectedUrls = urlQueue.splice(0, urlQueue.length > 5 ? 5 : urlQueue.length);
-    console.log('selected urls was', selectedUrls);
+    // console.log('selected urls was', selectedUrls);
     await handleRequests(selectedUrls, urlQueue);
   } catch (err) {
     console.log(err);
