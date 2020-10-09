@@ -1,3 +1,4 @@
+require('dotenv').config();
 const request = require('request-promise');
 const cheerio = require('cheerio');
 var urlx = require("url");
@@ -20,7 +21,7 @@ let customHeaders = {
 
 const bootstrap = async () => {
   try {
-    let urlQueue = ['https://www.medium.com/'];
+    let urlQueue = [process.env.URL];
     initiateScrapping(urlQueue);
   } catch (err) {
     console.log('Err: ', err);
@@ -88,7 +89,7 @@ async function handleResponse($, urlQueue) {
       for (let i = 0; i < urls.length; i++) {
         await handleSingleUrl(urls[i], urlQueue, i);
       }
-      console.log('returning from handle response');
+      // console.log('returning from handle response');
       resolve(results);
     } catch (err) {
       console.log('err', err);
@@ -103,9 +104,9 @@ async function handleSingleUrl(url, urlQueue, index) {
     try {
       // console.log('inside handle single--', index)
       let urlObj = urlx.parse(url);
-      if (urlObj && urlObj.hostname && urlObj.hostname.includes('medium.com') &&
+      if (urlObj && urlObj.hostname && urlObj.hostname.includes(process.env.FILTER_URL) &&
         urlObj.protocol === 'https:') {
-        console.log('inside if--', index);
+        // console.log('inside if--', index);
         let tempObj = {};
         tempObj.url = urlObj.href;
         tempObj.refCount = 1;

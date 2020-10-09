@@ -1,9 +1,8 @@
 const mongoose = require("mongoose");
-const MONGOURI = "mongodb://localhost:27017/scrapperDB";
-mongoose.set('debug',true)
+// mongoose.set('debug',true)
 const InitiateMongoServer = async () => {
   try {
-    await mongoose.connect(MONGOURI, {
+    await mongoose.connect(process.env.DB_CONN_STRING, {
       useNewUrlParser: true,
       useUnifiedTopology: true
     });
